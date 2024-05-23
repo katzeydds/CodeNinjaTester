@@ -1,0 +1,792 @@
+{
+	"info": {
+		"_postman_id": "ed985b4f-e14d-49dc-9c5c-c19e1f8eeaa5",
+		"name": "CodeNinja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31117425"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Content-Type header is application.json\", function (){\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Schema is valid\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    let schema = {\r",
+							"        type: 'object',\r",
+							"        properties: {\r",
+							"            data: {\r",
+							"                type: 'object',\r",
+							"                properties: {\r",
+							"                            name: { type: 'string' },\r",
+							"                            email: { type: 'string' },\r",
+							"                            _id: { type: 'string' }\r",
+							"                        },\r",
+							"                        required: ['name', 'email', '_id']\r",
+							"            },\r",
+							"            status: { type: 'string' }\r",
+							"        },\r",
+							"        required: ['data', 'status']\r",
+							"        };\r",
+							"\r",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/users/login",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:3000/api/v1/users/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2I2OGI2NzMzODUxZmY5NmRmZTNjYSIsImlhdCI6MTcxNTE2OTQ3MSwiZXhwIjoxNzIyOTQ1NDcxfQ.ADe5I1WEZ0LIR8zEUnfX5sW8uua50K8oEspe-EncXTU; Path=/; Expires=Tue, 06 Aug 2024 11:57:51 GMT; HttpOnly"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "356"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"164-xhXQOoLtNQds5vDKY9n7kuYcH6M\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 May 2024 11:57:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2I2OGI2NzMzODUxZmY5NmRmZTNjYSIsImlhdCI6MTcxNTE2OTQ3MSwiZXhwIjoxNzIyOTQ1NDcxfQ.ADe5I1WEZ0LIR8zEUnfX5sW8uua50K8oEspe-EncXTU\",\n    \"data\": {\n        \"_id\": \"663b68b6733851ff96dfe3ca\",\n        \"name\": \"vladb8ph6q3wm1\",\n        \"email\": \"kloopb8ph6q3wm1@gmail.com\",\n        \"role\": \"user\",\n        \"avatar\": \"avatars/avatar.svg\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Sign Up",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let random = Math.random().toString(36).substring(2);\r",
+							"\r",
+							"let userEmail = \"kloop\" + random + \"@gmail.com\";\r",
+							"let username = \"vlad\" + random;\r",
+							"let password = \"Test\" + random;\r",
+							"let confpassword = password;\r",
+							"let role = ['user'];\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"email\", userEmail);\r",
+							"pm.environment.set(\"name\", username);\r",
+							"pm.environment.set(\"password\", password);\r",
+							"pm.environment.set(\"passwordConfirm\", confpassword);\r",
+							"pm.environment.set(\"role\", role);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body contains user data\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.user).to.be.a('object');\r",
+							"    pm.expect(jsonData.data.user._id).to.be.a('string');\r",
+							"    pm.expect(jsonData.data.user.name).to.eql(pm.environment.get(\"name\"));\r",
+							"    pm.expect(jsonData.data.user.email).to.eql(pm.environment.get(\"email\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Schema is valid\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    let schema = {\r",
+							"        type: 'object',\r",
+							"        properties: {\r",
+							"            data: {\r",
+							"                type: 'object',\r",
+							"                properties: {\r",
+							"                    user: {\r",
+							"                        type: 'object',\r",
+							"                        properties: {\r",
+							"                            name: { type: 'string' },\r",
+							"                            email: { type: 'string' },\r",
+							"                            _id: { type: 'string' }\r",
+							"                        },\r",
+							"                        required: ['name', 'email', '_id']\r",
+							"                    }\r",
+							"                },\r",
+							"                required: ['user']\r",
+							"            },\r",
+							"            status: { type: 'string' }\r",
+							"        },\r",
+							"        required: ['data', 'status']\r",
+							"    };\r",
+							"\r",
+							"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get user id\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.environment.set('_id', jsonData.data.user._id);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"passwordConfirm\": \"{{passwordConfirm}}\",\r\n    \"role\": \"user\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/users/signup",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sign Up",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\",\r\n    \"passwordConfirm\": \"\",\r\n    \"role\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:3000/api/v1/users/signup",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2I2OGI2NzMzODUxZmY5NmRmZTNjYSIsImlhdCI6MTcxNTE2OTQ2MywiZXhwIjoxNzIyOTQ1NDYzfQ.iebHY8UlExEuhiijPhoiG-VZ4KSRB0anehp-3hT83pA; Path=/; Expires=Tue, 06 Aug 2024 11:57:43 GMT; HttpOnly"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "365"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16d-ypmtToarjKvkUwldA6dejC9DjaI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 May 2024 11:57:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2I2OGI2NzMzODUxZmY5NmRmZTNjYSIsImlhdCI6MTcxNTE2OTQ2MywiZXhwIjoxNzIyOTQ1NDYzfQ.iebHY8UlExEuhiijPhoiG-VZ4KSRB0anehp-3hT83pA\",\n    \"data\": {\n        \"user\": {\n            \"name\": \"vladb8ph6q3wm1\",\n            \"email\": \"kloopb8ph6q3wm1@gmail.com\",\n            \"role\": \"user\",\n            \"avatar\": \"avatars/avatar.svg\",\n            \"_id\": \"663b68b6733851ff96dfe3ca\",\n            \"__v\": 0\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Create task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(201);\r",
+							"});\r",
+							"pm.test(\"Task created successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"taskId\", jsonData.data.task._id);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body contains task data\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(jsonData).to.be.an('object');\r",
+							"    pm.expect(jsonData.data.task.task).to.eql(pm.environment.get(\"taskName\"));\r",
+							"    pm.expect(jsonData.data.task.status).to.eql(pm.environment.get(\"status\"));\r",
+							"    pm.expect(jsonData.data.task.priority).to.eql(pm.environment.get(\"priority\"));\r",
+							"    pm.expect(jsonData.data.task.timeline).to.eql(pm.environment.get(\"timeline\"));\r",
+							"    pm.expect(jsonData.data.task._id).to.eql(pm.environment.get(\"taskId\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has valid schema\", function () {\r",
+							"    const schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"status\": { \"type\": \"string\", \"enum\": [\"success\"] },\r",
+							"            \"data\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"task\": {\r",
+							"                        \"type\": \"object\",\r",
+							"                        \"properties\": {\r",
+							"                            \"_id\": { \"type\": \"string\" },\r",
+							"                            \"task\": { \"type\": \"string\" },\r",
+							"                            \"status\": { \"type\": \"string\" },\r",
+							"                            \"priority\": { \"type\": \"string\" },\r",
+							"                            \"timeline\": { \"type\": \"string\" },\r",
+							"                            \"key\": { \"type\": \"number\" }\r",
+							"                        },\r",
+							"                        \"required\": [\"_id\", \"task\", \"status\", \"priority\", \"timeline\", \"key\"]\r",
+							"                    }\r",
+							"                },\r",
+							"                \"required\": [\"task\"]\r",
+							"            }\r",
+							"        },\r",
+							"        \"required\": [\"status\", \"data\"]\r",
+							"    };\r",
+							"\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment')\r",
+							"\r",
+							"let random = Math.random().toString(36).substring(2);\r",
+							"\r",
+							"let taskName = \"x\" + random;\r",
+							"let status = ['To do', 'In progress', 'Done'];\r",
+							"let priority = ['Low', 'Medium', 'High'];\r",
+							"\r",
+							"let timelineStart = moment().subtract(Math.floor(Math.random() * 30), 'days').format('MMM D');\r",
+							"let timelineEnd = moment().add(Math.floor(Math.random() * 7), 'days').format('MMM D');\r",
+							"\r",
+							"let timeline = `${timelineStart}-${timelineEnd}`;\r",
+							"\r",
+							"let randomStatus = status[Math.floor(Math.random() * status.length)];\r",
+							"let randomPriority = priority[Math.floor(Math.random() * priority.length)];\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"taskName\", taskName);\r",
+							"pm.environment.set(\"status\", randomStatus);\r",
+							"pm.environment.set(\"priority\", randomPriority);\r",
+							"pm.environment.set(\"timeline\", timeline);\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"task\": \"{{taskName}}\",\r\n    \"status\": \"{{status}}\",\r\n    \"priority\": \"{{priority}}\",\r\n    \"timeline\": \"{{timeline}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/tasks",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create task",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\": \"\",\r\n    \"status\": \"\",\r\n    \"priority\": \"\",\r\n    \"timeline\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:3000/api/v1/tasks",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "178"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b2-cSof/tM3Y+KXWIX9rCAeQKVyZLE\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 May 2024 11:57:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"task\": {\n            \"task\": \"x1a4elswyvk1\",\n            \"status\": \"In progress\",\n            \"priority\": \"High\",\n            \"timeline\": \"Apr 14-May 13\",\n            \"_id\": \"663b68c4733851ff96dfe3cd\",\n            \"key\": 19,\n            \"__v\": 0\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get task details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"value of json fields\"), function () {\r",
+							"    let jsonData = pm.response.json()\r",
+							"\r",
+							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"taskName\"));\r",
+							"    pm.expect(jsonData.status).to.eql(pm.environment.get(\"status\"));\r",
+							"    pm.expect(jsonData.priority).to.eql(pm.environment.get(\"priority\"));\r",
+							"    pm.expect(jsonData.timeline).to.eql(pm.environment.get(\"timeline\"));\r",
+							"};\r",
+							"\r",
+							"pm.test(\"Response has valid schema\", function () {\r",
+							"    const schema = {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"            \"status\": { \"type\": \"string\", \"enum\": [\"success\"] },\r",
+							"            \"data\": {\r",
+							"                \"type\": \"object\",\r",
+							"                \"properties\": {\r",
+							"                    \"task\": {\r",
+							"                        \"type\": \"object\",\r",
+							"                        \"properties\": {\r",
+							"                            \"_id\": { \"type\": \"string\" },\r",
+							"                            \"task\": { \"type\": \"string\" },\r",
+							"                            \"status\": { \"type\": \"string\" },\r",
+							"                            \"priority\": { \"type\": \"string\" },\r",
+							"                            \"timeline\": { \"type\": \"string\" },\r",
+							"                            \"key\": { \"type\": \"number\" }\r",
+							"                        },\r",
+							"                        \"required\": [\"_id\", \"task\", \"status\", \"priority\", \"timeline\", \"key\"]\r",
+							"                    }\r",
+							"                },\r",
+							"                \"required\": [\"task\"]\r",
+							"            }\r",
+							"        },\r",
+							"        \"required\": [\"status\", \"data\"]\r",
+							"    };\r",
+							"\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/tasks/:id",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{taskId}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get task details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URI}}/tasks/:id",
+							"host": [
+								"{{BASE_URI}}"
+							],
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{taskId}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "191"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"bf-sowfzw8r0qjMlp6ZkkqkH0fwz9g\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 23 May 2024 10:09:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"task\": {\n            \"_id\": \"664f156e9ada8b4b8539d0a2\",\n            \"task\": \"xqxu84f345ig\",\n            \"owner\": [],\n            \"status\": \"In progress\",\n            \"priority\": \"Medium\",\n            \"timeline\": \"May 6-May 29\",\n            \"key\": 180,\n            \"__v\": 0\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"pm.test(\"Response body is empty\", function () {\r",
+							"    pm.expect(pm.response.text()).to.eql(\"\")\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/tasks/:id",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{taskId}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete task",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:3000/api/v1/tasks/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"20-bff5r/a5MyNNWy9hjn8a8pOLDxA\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 May 2024 11:58:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
