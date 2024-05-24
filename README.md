@@ -1,12 +1,11 @@
 
 # CodeNinja Testing
 
-Links for project github and postman tests:
-
 [Project GitHub](https://github.com/Numenpol/CodeNinjas_API_Project)
 
-[Postman](https://documenter.getpostman.com/view/31117425/2sA3QpCZ41)
+[Postman](https://documenter.getpostman.com/view/31117425/2sA3QpCZ41) API Tests
 
+[Automated tests](https://github.com/katzeydds/CodeNinjaTester/tree/main/docs/Test%20Scripts/e2e)
 
 # Installation
 1. Download the latest files from GitHub
