@@ -7,6 +7,15 @@
 
 [Automated tests](https://github.com/katzeydds/CodeNinjaTester/tree/main/docs/Test%20Scripts/e2e)
 
+# Technologies
+- Java
+- JavaScript
+
+# Tools
+- IntelliJ IDEA
+- Postman
+- Visual Studio Code
+
 # Installation
 1. Download the latest files from the project GitHub
 2. Extract the zip
