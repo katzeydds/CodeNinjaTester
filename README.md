@@ -8,7 +8,7 @@
 [Automated tests](https://github.com/katzeydds/CodeNinjaTester/tree/main/docs/Test%20Scripts/e2e)
 
 # Installation
-1. Download the latest files from GitHub
+1. Download the latest files from the project GitHub
 2. Extract the zip
 3. Open the extracted folder
 4. Click on the folder path and type cmd, press enter
